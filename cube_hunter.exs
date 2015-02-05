@@ -3,11 +3,11 @@ defmodule CubeHunter do
     do_find_n_cubes(n, starting_value, %{}, {0, 0})
   end
 
-  def do_find_n_cubes(n_cubes_to_find, next_value, seen, {n_cubes_to_find, num}) do
+  def do_find_n_cubes(n_cubes_to_find, _, _, {n_cubes_to_find, num}) do
     :math.pow(num,3)
   end
 
-  def do_find_n_cubes(n_cubes_to_find, next_value, seen, pos_answer) do
+  def do_find_n_cubes(n_cubes_to_find, next_value, seen, _) do
     [updated_seen, {count, num}] = update_seen_and_count(seen, next_value)
     do_find_n_cubes(n_cubes_to_find, next_value + 1, updated_seen, {count, num})
   end
@@ -39,13 +39,13 @@ defmodule PermuteTest do
 
   test "given dict and max, update and return dict and {count, first_seen } new max" do 
     seen = %{"125":  {3,5}, "126": {5, 6}}
-    [new_dict, {count, num} ] = CubeHunter.update_seen_and_count(seen,5) 
+    [_, {count, num} ] = CubeHunter.update_seen_and_count(seen,5) 
     assert count == 4
+    assert num == 5
   end
 
   test "345" do 
     a = CubeHunter.find_n_cubes(3, 1)
-    IO.puts inspect(a)
     assert :math.pow(345,3) == a
   end
 
