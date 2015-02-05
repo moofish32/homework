@@ -30,7 +30,7 @@ defmodule CubeHunter do
 end
 
 ExUnit.start
-defmodule PermuteTest do 
+defmodule CubeHunterTest do 
   use ExUnit.Case
 
   test "given 12 return 12^3 as 1278 as a string" do 
