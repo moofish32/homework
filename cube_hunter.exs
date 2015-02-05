@@ -12,12 +12,18 @@ defmodule CubeHunter do
   end
 
   def cube_and_sort_digits(number) do
-    :math.pow(12,3) 
+    :math.pow(number,3) 
     |> Kernel.round
     |> Integer.to_string 
     |> String.codepoints
     |> Enum.sort
     |> Enum.join
+  end
+
+  def update_seen_and_count(dict, new_value) do 
+    string_value = cube_and_sort_digits(new_value)
+    dict = Dict.update(dict, :"#{string_value}", {1, new_value}, fn {count, first} -> {count + 1, first} end)
+    [dict, dict[:"#{string_value}"]]
   end
 
 end
@@ -36,5 +42,14 @@ defmodule PermuteTest do
 
   test "given 12 return 12^3 as 1278 as a string" do 
     assert CubeHunter.cube_and_sort_digits(12) == "1278"
+  end
+
+  test "given dict and max, update and return dict and {count, first_seen } new max" do 
+    seen = %{"125":  {3,5}, "126": {5, 6}}
+    [new_dict, {count, num} ] = CubeHunter.update_seen_and_count(seen,5) 
+    IO.puts count
+    IO.puts num
+    IO.puts inspect(new_dict)
+    assert count == 4
   end
 end
