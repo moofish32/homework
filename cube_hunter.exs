@@ -1,19 +1,15 @@
 defmodule CubeHunter do
   def find_n_cubes(n, starting_value) do
-    do_find_n_cubes(n, starting_value, 0, %{}, 0)
+    do_find_n_cubes(n, starting_value, %{}, {0, 0})
   end
 
-  def do_find_n_cubes(n_cubes_to_find, next_value, n_cubes_to_find, seen, max_length) do
-    IO.puts "IM DONE"
-    key = cube_and_sort_digits(next_value - 1)
-    seen[:"#{key}"]
+  def do_find_n_cubes(n_cubes_to_find, next_value, seen, {n_cubes_to_find, num}) do
+    :math.pow(num,3)
   end
 
-  def do_find_n_cubes(n_cubes_to_find, next_value, current_max, seen, max_length) do
-    "IM adding a new number #{next_value} cubed"
+  def do_find_n_cubes(n_cubes_to_find, next_value, seen, pos_answer) do
     [updated_seen, {count, num}] = update_seen_and_count(seen, next_value)
-    IO.puts inspect(updated_seen)
-    do_find_n_cubes(n_cubes_to_find, next_value + 1, max(count, current_max), updated_seen, max_length)
+    do_find_n_cubes(n_cubes_to_find, next_value + 1, updated_seen, {count, num})
   end
 
   def cube_and_sort_digits(number) do
@@ -37,14 +33,6 @@ ExUnit.start
 defmodule PermuteTest do 
   use ExUnit.Case
 
-  # test "I have reached the end when n = max count" do 
-  #   assert CubeHunter.do_find_n_cubes(5, 6987987, 5, %{}, 987) == "IM DONE"
-  # end
-
-  # test "I am adding a new value" do 
-  #   assert CubeHunter.do_find_n_cubes(5, 987987, 1, %{}, 987) == "IM adding a new number 987987 cubed"
-  # end
-  #
   test "given 12 return 12^3 as 1278 as a string" do 
     assert CubeHunter.cube_and_sort_digits(12) == "1278"
   end
@@ -52,15 +40,17 @@ defmodule PermuteTest do
   test "given dict and max, update and return dict and {count, first_seen } new max" do 
     seen = %{"125":  {3,5}, "126": {5, 6}}
     [new_dict, {count, num} ] = CubeHunter.update_seen_and_count(seen,5) 
-    IO.puts count
-    IO.puts num
-    IO.puts inspect(new_dict)
     assert count == 4
   end
 
   test "345" do 
     a = CubeHunter.find_n_cubes(3, 1)
     IO.puts inspect(a)
-    assert true == true
+    assert :math.pow(345,3) == a
+  end
+
+  test "sovles for 5" do 
+    a = CubeHunter.find_n_cubes(5,1)
+    assert 127035954683 == a
   end
 end
