@@ -1,6 +1,6 @@
-sper Engineering Coding Test Version 2
+Engineering Coding Test Version 2
 
- You must use Erlang, Scala, F#, Haskell, or Lisp. If 
+* You must use Erlang, Scala, F#, Haskell, or Lisp. If 
 
 you don’t know any of these languages, that’s OK; part 
 
@@ -8,19 +8,19 @@ of the exercise is for us to see how you pick up new
 
 languages.
 
- Please don’t Google the solution. We can’t know for 
+* Please don’t Google the solution. We can’t know for 
 
 sure that you didn’t, but you will . 
 
- Please show code that compiles and write tests that 
+* Please show code that compiles and write tests that 
 
 test your work.
 
- Suggest optimizations if you have ideas for how to 
+* Suggest optimizations if you have ideas for how to 
 
 make the solution faster.
 
- See learnxinyminutes.com/docs/erlang/ and 
+* See learnxinyminutes.com/docs/erlang/ and 
 
 learnxinyminutes.com/docs/scala/ for brief overviews 
 
